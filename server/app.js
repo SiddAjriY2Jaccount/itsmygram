@@ -1,12 +1,37 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const User = require('./models/user');
 const app = express();
-const PORT = 5000
+const { MONGOURI, PORT } = require('./keys');
 
-
-app.get('/',(req, res) => {
-    res.send("Sup world?")
+//const pw = "1Brp9TaFZwzTPpSy" --> password to connect to MongoDB Atlas
+/* mongoose.connect(MONGOURI, {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
 })
 
-app.listen(PORT, () => {
+mongoose.connection.on('connected', () => {
+    console.log("connection made to atlas")
+})
+
+mongoose.connect(MONGOURI)
+mongoose.connection.on('error', () => {
+    console.log("ERROR: during connection to atlas")
+}) */
+
+mongoose.connect(MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => {
+      app.listen(PORT)
+      console.log(`connected to atlas, port ${PORT}`)
+    })
+  .catch((err) => console.log(err));
+
+//middleware
+app.use(express.json())
+app.use(express.urlencoded({ extended: true })); //passes all the urlencoded data and makes it accessible as an object
+app.use('/', require('./routes/auth'))
+
+
+/* app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
-})
+})  */
