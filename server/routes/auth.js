@@ -1,9 +1,23 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+const requireLogin = require('../middleware/requireLogin')
 const User = mongoose.model("User")
 
+const { JWT_SECRET } = require('../keys')
+
 const router = express.Router()
+
+//Testing account:
+//Email: sidd@gmail.com
+//Password: sidd
+
+
+//protected route (just to test)
+router.get('/protected', requireLogin, (req, res) => {
+    res.send("Helllo! Testing!")
+})
 
 // signup route
 router.post('/signup', (req, res) => {
@@ -57,7 +71,10 @@ router.post('/login', (req, res) => {
           bcrypt.compare(password, user_obj_drom_db.password)
             .then(matchFound => {
                 if (matchFound) {
-                    res.json({message: "Login Successful"})
+                    //res.json({message: "Login Successful"})
+                    const token = jwt.sign({_id: user_obj_drom_db._id}, JWT_SECRET)
+                    res.json({message: "Login Successful", token})
+
                 }
                 else {
                     return res.status(422).json({error: 'invalid credentials'})
@@ -69,7 +86,6 @@ router.post('/login', (req, res) => {
           //console.log(err)
           return res.status(422).json({error: "invalid credentials"})
         })
-
 
 })
 
