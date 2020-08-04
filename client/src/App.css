@@ -1,38 +1,68 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Marvel:wght@700&display=swap');
+
+.brand-logo {
+  font-family: 'Marvel', sans-serif;
+}
+
+.maincard {
+  margin-top: 30px
+}
+
+.card-title {
+  font-family: 'Marvel', sans-serif;
+  color: black;
+  font-weight: bold;
+}
+
+.auth-card {
+  padding: 20px;
   text-align: center;
+  max-width: 400px;
+  margin: 10px auto;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* label color */
+/* .input-field {
+  color: blue !important;
+} */
+/* label focus color */
+/* .input-field input[type=text]:focus {
+  color: turquoise !important;
+} */
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid blue !important;
+  box-shadow: 0 1px 0 0 blue !important;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid greenyellow !important;
+  box-shadow: 0 1px 0 0 greenyellow !important;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid red !important;
+  box-shadow: 0 1px 0 0 red !important;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: blue !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.gallery {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.App-link {
-  color: #61dafb;
+.item {
+  width: 30%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.home-card {
+  max-width: 600px;
+  height: max-content;
+  margin: 30px auto;
 }

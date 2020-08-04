@@ -4,6 +4,7 @@ const requireLogin = require('../middleware/requireLogin')
 const Post = mongoose.model("Post")
 const router = express.Router()
 
+
 // Creating a Post
 router.post('/createpost', requireLogin, (req, res) => {
     const {title, body} = req.body
