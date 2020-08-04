@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const User = require('./models/user');
+const Post = require('./models/post');
 const app = express();
 const { MONGOURI, PORT } = require('./keys');
 
@@ -30,6 +31,7 @@ mongoose.connect(MONGOURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })); //passes all the urlencoded data and makes it accessible as an object
 app.use('/', require('./routes/auth'))
+app.use('/', require('./routes/posts'))
 
 
 /* app.listen(PORT, () => {

@@ -29,10 +29,9 @@ module.exports = (req, res, next) => {
           .then(userdata => {
               //console.log(userdata)
               req.user = userdata
+              next()           // next() placed here because only once req.user is set it'll jump to next portion after middleware
           })
           .catch((err) => console.log(err))
-
-        next()
 
     })
 }

@@ -15,9 +15,10 @@ const router = express.Router()
 
 
 //protected route (just to test)
-router.get('/protected', requireLogin, (req, res) => {
-    res.send("Helllo! Testing!")
-})
+/* router.get('/protected', requireLogin, (req, res) => {
+    res.send("Hello! Testing!")
+}) */
+
 
 // signup route
 router.post('/signup', (req, res) => {
