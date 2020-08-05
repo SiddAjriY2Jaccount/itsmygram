@@ -24,15 +24,16 @@ const router = express.Router()
 router.post('/signup', (req, res) => {
     const {name, email, password} = req.body
     if (!email || !password || !name)
-    {
-        return res.status(422).json({message: "some field empty"})    
+    {   
+        console.log("Error: Field Empty")
+        return res.status(422).json({error: "Fields are empty"})    
     }
 
     //console.log(name, email, pw)
     User.findOne({ email: email })
         .then((existingUser) => {
             if (existingUser) {
-            return res.status(422).json({message: "user with that email exists"})
+            return res.status(422).json({error: "User with that email exists"})
             }
 
             bcrypt.hash(password, 11)
@@ -46,7 +47,7 @@ router.post('/signup', (req, res) => {
     
                 user.save()
                     .then(() => {
-                        res.json({message: "user successfully registered"})
+                        res.json({message: "User successfully registered"})
                     })
                     .catch((err) => console.log(err))                    
             })

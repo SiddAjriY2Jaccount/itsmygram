@@ -10,13 +10,13 @@ function CreatePost() {
         }}>
             <input type="text" placeholder="Title" />            
             <input type="text" placeholder="Body" />
-            <div class="file-field input-field">
-                <div class="btn waves-effect waves-light green darken-1">
+            <div className="file-field input-field">
+                <div className="btn waves-effect waves-light green darken-1">
                     <span>upload image</span>
                     <input type="file" />
                 </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" />
+                <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text" />
                 </div>
             </div>
             <button className="btn waves-effect waves-light indigo darken-1" name="action">
