@@ -11,8 +11,13 @@ function Register() {
 
     const PostData = () => {
 
+        // Fields empty check
+        if (email == "" || name == "" || password == "") {
+            M.toast({html: "Fields are empty", classes: "red darken-2"})
+        }
+
         // email validator regex
-        if (! /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+        else if (! /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
             M.toast({html: "Invalid email", classes: "red darken-2"})
         }
 
@@ -42,14 +47,14 @@ function Register() {
               }
 
               else {
-                  M.toast({html: data.message, classes:"light-green darken-2"})
-                  history.push('/login')
+  
+                M.toast({html: data.message, classes:"light-green darken-2"})
+                history.push('/login')
+                                  
               }
           })
           .catch(error => console.log(error))
-        
         }
-
     }
 
     return (
