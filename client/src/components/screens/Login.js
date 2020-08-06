@@ -45,7 +45,9 @@ function Login() {
               }
 
               else {
-  
+
+                localStorage.setItem("jwt", data.token)  
+                localStorage.setItem("user", JSON.stringify(data.user))  
                 M.toast({html: data.message, classes:"light-green darken-2"})
                 history.push('/profile')
                                   

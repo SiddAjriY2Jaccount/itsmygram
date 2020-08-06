@@ -10,22 +10,22 @@ router.post('/createpost', requireLogin, (req, res) => {
     const {title, body, url} = req.body
 
     if (!title || !body || !url) {
-        res.status(422).send.json({error: "Some fields are empty"})
+        res.status(422).json({error: "Some fields are empty"})
     }
 
-    console.log(req.user)
+    //console.log(req.user)
     req.user.password = undefined
 
     const post = new Post({
         title,
         body,
-        url,
+        photo: url,
         postedBy: req.user
      }) 
      
     post.save()
        .then((result) => {
-           console.log(result)
+           //console.log(result)
            res.json({message: "Post created successfully", post: result})
        })
        .catch((err) => {

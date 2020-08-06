@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import M from 'materialize-css'
 
@@ -9,6 +9,46 @@ function CreatePost() {
     const [body, setBody] = useState("")
     const [img, setImg] = useState("")
     const [url, setUrl] = useState("")
+
+    useEffect(() => {
+        if (url) {
+
+            fetch(
+                "/createpost",
+                
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + localStorage.getItem("jwt")
+                    },
+                    body: JSON.stringify({ 
+                        title, 
+                        body,
+                        url
+                    })
+    
+                }
+                )
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.error) {
+                        M.toast({html: data.error, classes:"red darken-2"})
+                    }
+    
+                    else {
+        
+                    M.toast({html: data.message, classes:"light-green darken-2"})
+                    history.push('/profile')
+                                        
+                    }
+    
+                })
+                .catch(error => console.log(error))
+    
+        }
+    }, [url])
 
     const postDetails = () => {
         const data = new FormData()
@@ -26,39 +66,6 @@ function CreatePost() {
             .then(data => {
                 console.log(data)
                 setUrl(data.url)
-            })
-            .catch(error => console.log(error))
-
-        fetch(
-            "/createpost",
-            
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ 
-                    title, 
-                    body,
-                    url
-                })
-
-            }
-            )
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.error) {
-                    M.toast({html: data.error, classes:"red darken-2"})
-                }
-
-                else {
-    
-                M.toast({html: data.message, classes:"light-green darken-2"})
-                history.push('/profile')
-                                    
-                }
-
             })
             .catch(error => console.log(error))
 
