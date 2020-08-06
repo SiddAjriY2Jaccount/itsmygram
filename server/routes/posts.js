@@ -7,9 +7,9 @@ const router = express.Router()
 
 // Creating a Post
 router.post('/createpost', requireLogin, (req, res) => {
-    const {title, body} = req.body
+    const {title, body, url} = req.body
 
-    if (!title || !body) {
+    if (!title || !body || !url) {
         res.status(422).send.json({error: "Some fields are empty"})
     }
 
@@ -19,15 +19,19 @@ router.post('/createpost', requireLogin, (req, res) => {
     const post = new Post({
         title,
         body,
+        url,
         postedBy: req.user
      }) 
      
     post.save()
        .then((result) => {
            console.log(result)
-           res.json({post: result})
+           res.json({message: "Post created successfully", post: result})
        })
-       .catch((err) => console.log(err))
+       .catch((err) => {
+           console.log(err)
+           res.json({error: "Error in creating post"})
+        })
 
 })
 
