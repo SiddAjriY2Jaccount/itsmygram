@@ -63,30 +63,35 @@ router.post('/login', (req, res) => {
     const { email, password } = req.body
 
     if (!email || !password) {
-        return res.status(422).json({error: 'email or password field is empty'})
+        return res.status(422).json({error: 'Fields are empty'})
     }
 
 
     User.findOne({ email: email })
       .then((user_obj_drom_db) => {
-
+          console.log("found email id")
           bcrypt.compare(password, user_obj_drom_db.password)
             .then(matchFound => {
+                
                 if (matchFound) {
+                    
                     //res.json({message: "Login Successful"})
                     const token = jwt.sign({_id: user_obj_drom_db._id}, JWT_SECRET)
-                    res.json({message: "Login Successful", token})
+                    
+                    //retrieve some user details
+                    const {_id, name, email} = user_obj_drom_db
+                    res.json({message: "Login Successful", token, user: {_id, name, email}})
 
                 }
                 else {
-                    return res.status(422).json({error: 'invalid credentials'})
+                    return res.status(422).json({error: 'Invalid credentials'})
                 }
             })
             .catch((err) => console.log(err))
       })
       .catch((err) => {
           //console.log(err)
-          return res.status(422).json({error: "invalid credentials"})
+          return res.status(422).json({error: "Invalid credentials"})
         })
 
 })
