@@ -1,6 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import {UserContext} from '../../App'
 
 function Profile() {
+
+    const [post, setPost] = useState([])
+    const { state, dispatch } = useContext(UserContext)
+    const user = JSON.parse(localStorage.getItem("user"))
+
+    useEffect(() => {
+        fetch('/myposts', 
+            {
+                headers: {
+                    //"Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("jwt")
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setPost(data.myposts)
+            })
+    }, [])
+
     return (
         <div style={{
             maxWidth: "850px",
@@ -18,7 +39,7 @@ function Profile() {
                     />
                 </div>
                 <div>
-                    <h3>Miss McNamara</h3>
+                    <h3>{user.name}</h3>
                     <div style={{
                         display: 'flex',
                         justifyContent: 'space-between',
@@ -32,12 +53,19 @@ function Profile() {
             </div>
             <hr />
             <div className="gallery">
+                    {
+                        post.map((post) => {
+                            return (
+                                <img className="item" src={post.photo} alt={post.title} key={post._id}/>
+                            )
+                        })
+                    }
+                    {/* <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                    <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                    <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
+                    <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" /> */}
             </div>
         </div>
     )
