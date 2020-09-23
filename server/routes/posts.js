@@ -37,7 +37,7 @@ router.post('/createpost', requireLogin, (req, res) => {
 
 
 //Fetch all posts using GET request
-router.get('/view_all_posts', (req, res) => {
+router.get('/view_all_posts', requireLogin, (req, res) => {
     Post.find()
       .populate("postedBy", "_id name")
       .then((posts) => {
