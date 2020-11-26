@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import {UserContext} from '../../App'
 
 function Home() {
 
     const [data, setData] = useState([])
+    const { state, dispatch } = useContext(UserContext)
     useEffect(() => {
         fetch(
             
@@ -17,10 +19,77 @@ function Home() {
             })
             .then(res => res.json())
             .then(result => {
-                //console.log(result);
+                console.log(result);
                 setData(result.posts)
             })
     }, [])
+
+    const likeposts = (id) => {
+        fetch('/like', 
+        {
+            method: "put",
+            
+            headers: 
+            {
+            
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+        
+        
+            },
+
+            body: JSON.stringify({
+                postId: id
+            })
+     
+        }).then(res => res.json())
+        .then(result => {
+            console.log(result)
+            const newData = data.map(item => {
+                if (item._id == result._id) {
+                    return result
+                }
+
+                else {
+                    return item
+                }
+            })
+
+            setData(newData)
+        })
+    }
+
+    const unlikeposts = (id) => {
+        fetch('/unlike', 
+        {
+            method: "put",
+            
+            headers: 
+            {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            },
+
+            body: JSON.stringify({
+                postId: id
+            })
+     
+        }).then(res => res.json())
+        .then(result => {
+            console.log(result)
+            const newData = data.map(item => {
+                if (item._id == result._id) {
+                    return result
+                }
+
+                else {
+                    return item
+                }
+            })
+
+            setData(newData)
+        }).catch(error => console.log(error))
+    }
 
     return (
         <div>
@@ -41,7 +110,31 @@ function Home() {
                             <div className="card-content">
                                 <h4>{item.title}</h4>
                                 <p>{item.body}</p>
-                                <i className="material-icons" style={{color: 'red'}}>favorite</i>
+                                <p>{item.likes.length} likes</p>
+                                <i className="material-icons" style={{color: 'blue'}}>favorite</i>
+                                
+                                {
+                                
+                                item.likes.includes(state._id) 
+
+                                ?
+
+                                <i className="material-icons" 
+                                style={{color: 'red'}}
+                                onClick={() => {unlikeposts(item._id);}}
+                                >thumb_down
+                                </i>
+
+                                :
+                                
+                                <i className="material-icons" 
+                                style={{color: 'green'}}
+                                onClick={() => {likeposts(item._id);}}
+                                >thumb_up
+                                </i>
+                                
+                                }
+                                
                                 <input type="text" placeholder="Add a comment..." />
                             </div>
                         </div>
