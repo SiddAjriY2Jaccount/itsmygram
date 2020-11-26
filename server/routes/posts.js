@@ -97,7 +97,7 @@ router.put('/unlike', requireLogin, (req, res) => {
         }
 
         else {
-            console.log(result)
+            //console.log(result)
             res.json(result)
         }
     })
