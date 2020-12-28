@@ -5,7 +5,6 @@ const Post = require('./models/post');
 const app = express();
 const { MONGOURI, PORT } = require('./keys');
 
-//const pw = "1Brp9TaFZwzTPpSy" --> password to connect to MongoDB Atlas
 /* mongoose.connect(MONGOURI, {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
