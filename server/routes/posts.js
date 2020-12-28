@@ -71,7 +71,9 @@ router.put('/like', requireLogin, (req, res) => {
         {
             new: true
         }
-    ).exec((err, result) => {
+    ).populate("postedBy", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .exec((err, result) => {
         if (err) {
             return res.status(422).json({error: err})
         }
@@ -93,7 +95,9 @@ router.put('/unlike', requireLogin, (req, res) => {
         {
             new: true
         }
-    ).exec((err, result) => {
+    ).populate("postedBy", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .exec((err, result) => {
         if (err) {
             return res.status(422).json({error: err})
         }
