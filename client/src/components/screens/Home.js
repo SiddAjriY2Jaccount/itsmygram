@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {UserContext} from '../../App'
+import {Link} from 'react-router-dom'
 
 function Home() {
 
@@ -155,7 +156,7 @@ function Home() {
                                 padding: '3px', 
                                 margin: '3px auto',
                             }}>
-                                <h5>{item.postedBy.name}</h5>
+                                <h5><Link to = {item.postedBy._id !== state._id ? "/profile/" + item.postedBy._id : "/profile"}>{item.postedBy.name} </Link></h5>
                                 
                                 {
                                 item.postedBy._id == state._id 
