@@ -31,6 +31,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true })); //passes all the urlencoded data and makes it accessible as an object
 app.use('/', require('./routes/auth'))
 app.use('/', require('./routes/posts'))
+app.use('/', require('./routes/user'))
 
 
 /* app.listen(PORT, () => {
