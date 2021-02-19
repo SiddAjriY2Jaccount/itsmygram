@@ -61,6 +61,7 @@ function Home() {
     }
 
     const unlikeposts = (id) => {
+        console.log(id)
         fetch('/unlike', 
         {
             method: "put",
