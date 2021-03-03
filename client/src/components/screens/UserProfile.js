@@ -42,7 +42,17 @@ function Profile() {
 
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            dispatch({ type: "UPDATE", payload: {following: data.following, followers: data.followers}});
+            localStorage.setItem("user", JSON.stringify(data));
+            /* setProfile((prevState) => {
+                return {
+                    ...prevState,
+                    user: data
+                }
+            }) --> this was updating logged in user profile, need to update followed user profile */ 
+        })
     }
 
     return (
@@ -74,8 +84,8 @@ function Profile() {
                         width: '100%'
                     }}>
                         <p>{userProfile.posts.length} posts</p>
-                        <p>90 followers</p>
-                        <p>70 following</p>
+                        <p>{userProfile.user.followers.length} followers</p>
+                        <p>{userProfile.user.following.length} following</p>
                     </div>
                     <button 
                         className="btn waves-effect waves-light indigo darken-1"
