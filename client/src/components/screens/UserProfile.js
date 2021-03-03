@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 function Profile() {
 
     const [userProfile, setProfile] = useState(null)
+    const [showFollow, setShowFollow] = useState(true)
     const { state, dispatch } = useContext(UserContext)
     const user = JSON.parse(localStorage.getItem("user"))
     const {userid} = useParams() 
@@ -46,13 +47,54 @@ function Profile() {
             console.log(data)
             dispatch({ type: "UPDATE", payload: {following: data.following, followers: data.followers}});
             localStorage.setItem("user", JSON.stringify(data));
-            /* setProfile((prevState) => {
+            setProfile((prevState) => {
                 return {
                     ...prevState,
-                    user: data
+                    user: {
+                        ...prevState.user,
+                        followers: [...prevState.user.followers, data._id]
+                    }
                 }
-            }) --> this was updating logged in user profile, need to update followed user profile */ 
+            }) 
         })
+        
+        setShowFollow(false)
+    }
+    
+    
+    const unfollowUser = () => {
+        fetch('/unfollow', { 
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")            
+            },
+            body: JSON.stringify({
+                unfollowId: userid
+            })
+
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            dispatch({ type: "UPDATE", payload: {following: data.following, followers: data.followers}});
+            localStorage.setItem("user", JSON.stringify(data));
+ 
+            setProfile((prevState) => {
+
+                const updatedFollowersList = prevState.user.followers.filter(followerId => followerId != data._id);
+
+                return {
+                    ...prevState,
+                    user: {
+                        ...prevState.user,
+                        followers: updatedFollowersList
+                    }
+                }
+            }) 
+        })
+
+        setShowFollow(true)
     }
 
     return (
@@ -87,6 +129,12 @@ function Profile() {
                         <p>{userProfile.user.followers.length} followers</p>
                         <p>{userProfile.user.following.length} following</p>
                     </div>
+
+                    {/* if logged-in user already follows, show only the unfollow button, else show only the follow button */}
+                    
+                    {
+                    showFollow
+                    ?    
                     <button 
                         className="btn waves-effect waves-light indigo darken-1"
                         name="action"
@@ -95,6 +143,19 @@ function Profile() {
                             Follow
                             {/* <i className="material-icons right">Login</i> */}
                     </button>
+
+                    :
+                    <button 
+                        className="btn waves-effect waves-light indigo darken-1"
+                        name="action"
+                        onClick={() => unfollowUser()} 
+                        >
+                            Unfollow
+                            {/* <i className="material-icons right">Login</i> */}
+                    </button>
+
+                    }
+
                 </div>
             </div>
             <hr />
@@ -102,7 +163,7 @@ function Profile() {
                     {
                         userProfile.posts.map((post) => {
                             return (
-                                <img className="item" src={post.photo} alt={post.title} key={post._id}/>
+                                <img style={{margin: "10px"}} className="item" src={post.photo} alt={post.title} key={post._id}/>
                             )
                         })
                     }

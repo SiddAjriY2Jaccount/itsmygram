@@ -10,8 +10,8 @@ const { JWT_SECRET } = require('../keys')
 const router = express.Router()
 
 //Testing account:
-//Email: sidd@gmail.com
-//Password: sidd
+//Email: kruger@gmail.com
+//Password: kruger
 
 
 //protected route (just to test)
@@ -79,8 +79,8 @@ router.post('/login', (req, res) => {
                     const token = jwt.sign({_id: user_obj_drom_db._id}, JWT_SECRET)
                     
                     //retrieve some user details
-                    const {_id, name, email} = user_obj_drom_db
-                    res.json({message: "Login Successful", token, user: {_id, name, email}})
+                    const {_id, name, email, followers, following} = user_obj_drom_db
+                    res.json({message: "Login Successful", token, user: {_id, name, email, followers, following}})
 
                 }
                 else {

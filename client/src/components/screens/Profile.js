@@ -5,6 +5,9 @@ function Profile() {
 
     const [post, setPost] = useState([])
     const { state, dispatch } = useContext(UserContext)
+
+    console.log(state)
+
     const user = JSON.parse(localStorage.getItem("user"))
 
     useEffect(() => {
@@ -19,8 +22,9 @@ function Profile() {
             .then(data => {
                 console.log(data)
                 setPost(data.myposts)
+                //console.log(post);
             })
-    }, [])
+    }, [post]);
 
     return (
         <div style={{
@@ -45,9 +49,11 @@ function Profile() {
                         justifyContent: 'space-between',
                         width: '100%'
                     }}>
-                        <p>40 posts</p>
-                        <p>90 followers</p>
-                        <p>70 following</p>
+                        <p>{post.length} posts</p>
+                        {/* <p>{user.followers.length} followers</p>
+                        <p>{user.following.length} following</p> */}
+                        <p>{user.following.length} following</p>
+                        <p>{user.followers.length} following</p>
                     </div>
                 </div>
             </div>
