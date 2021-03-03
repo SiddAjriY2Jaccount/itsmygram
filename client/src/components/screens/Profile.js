@@ -62,7 +62,7 @@ function Profile() {
                     {
                         post.map((post) => {
                             return (
-                                <img className="item" src={post.photo} alt={post.title} key={post._id}/>
+                                <img style={{margin: "10px"}} className="item" src={post.photo} alt={post.title} key={post._id}/>
                             )
                         })
                     }
