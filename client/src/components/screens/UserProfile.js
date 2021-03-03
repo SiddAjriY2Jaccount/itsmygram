@@ -29,6 +29,21 @@ function Profile() {
 
     // useEffect(() => { console.log(userProfile) }, [userProfile])
 
+    const followUser = () => {
+        fetch('/follow', { 
+            method: "PUT",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")            
+            },
+            body: JSON.stringify({
+                followId: userid
+            })
+
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
 
     return (
 
@@ -62,6 +77,14 @@ function Profile() {
                         <p>90 followers</p>
                         <p>70 following</p>
                     </div>
+                    <button 
+                        className="btn waves-effect waves-light indigo darken-1"
+                        name="action"
+                        onClick={() => followUser()} 
+                        >
+                            Follow
+                            {/* <i className="material-icons right">Login</i> */}
+                    </button>
                 </div>
             </div>
             <hr />
