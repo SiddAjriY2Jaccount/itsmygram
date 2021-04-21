@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 module.exports = {
-    PORT: 5000,
-    MONGOURI: "mongodb+srv://siddhanth:1Brp9TaFZwzTPpSy@cluster0.n0lxf.mongodb.net/itsmygram?retryWrites=true&w=majority",
-    JWT_SECRET: "brianpillmanjr"
+    PORT: process.env.PORT,
+    MONGOURI: process.env.MONGOURI,
+    JWT_SECRET: process.env.JWT_SECRET
 }
