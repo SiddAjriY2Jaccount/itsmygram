@@ -47,6 +47,19 @@ router.get('/view_all_posts', requireLogin, (req, res) => {
       .catch((err) => console.log(err))
 })
 
+//Fetch all posts of only those users whom you follow using GET request
+router.get('/view_all_follow_posts', requireLogin, (req, res) => {
+    
+    // if postedBy is in following list
+    Post.find({postedBy: {$in: req.user.following}})
+      .populate("postedBy", "_id name")
+      .populate("comments.postedBy", "_id name")
+      .then((posts) => {
+          res.json({posts})
+      })
+      .catch((err) => console.log(err))
+})
+
 
 //Get only the posts made by logged in user
 router.get('/myposts', requireLogin, (req, res) => {

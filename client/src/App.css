@@ -2,6 +2,8 @@
 
 .brand-logo {
   font-family: 'Marvel', sans-serif;
+  cursor: pointer;
+  padding-left: '6px';
 }
 
 .maincard {
@@ -86,4 +88,8 @@
   top: 60px !important;
   right: 20px !important;
   left: auto !important;
+}
+
+.material-icons {
+  cursor: pointer;
 }

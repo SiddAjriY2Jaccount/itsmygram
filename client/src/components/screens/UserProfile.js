@@ -5,10 +5,12 @@ import { useParams } from 'react-router-dom'
 function Profile() {
 
     const [userProfile, setProfile] = useState(null)
-    const [showFollow, setShowFollow] = useState(true)
     const { state, dispatch } = useContext(UserContext)
     const user = JSON.parse(localStorage.getItem("user"))
     const {userid} = useParams() 
+    
+    const [showFollow, setShowFollow] = useState(state ? !state.following.includes(userid) : true)
+    
     console.log(userid);
     //console.log(userProfile);
 
@@ -125,9 +127,9 @@ function Profile() {
                         justifyContent: 'space-between',
                         width: '100%'
                     }}>
-                        <p>{userProfile.posts.length} posts</p>
-                        <p>{userProfile.user.followers.length} followers</p>
-                        <p>{userProfile.user.following.length} following</p>
+                        <p>  {userProfile.posts.length} posts  | </p>
+                        <p> | {userProfile.user.followers.length} followers  | </p>
+                        <p> | {userProfile.user.following.length} following   </p>
                     </div>
 
                     {/* if logged-in user already follows, show only the unfollow button, else show only the follow button */}

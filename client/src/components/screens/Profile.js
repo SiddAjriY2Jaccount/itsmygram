@@ -49,11 +49,11 @@ function Profile() {
                         justifyContent: 'space-between',
                         width: '100%'
                     }}>
-                        <p>{post.length} posts</p>
+                        <p>  {post.length} posts  | </p>
                         {/* <p>{user.followers.length} followers</p>
                         <p>{user.following.length} following</p> */}
-                        <p>{user.following.length} following</p>
-                        <p>{user.followers.length} following</p>
+                        <p> | {user.following.length} following  | </p>
+                        <p> | {user.followers.length} followers   </p>
                     </div>
                 </div>
             </div>

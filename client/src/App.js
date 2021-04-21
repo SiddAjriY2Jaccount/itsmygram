@@ -6,6 +6,7 @@ import Register from './components/screens/Register'
 import Profile from './components/screens/Profile'
 import CreatePost from './components/screens/CreatePost'
 import UserProfile from './components/screens/UserProfile'
+import FollowedUsersPosts from './components/screens/FollowedUsersPosts'
 import './App.css'
 import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'
 import { reducer, initialState } from './reducers/userReducer'
@@ -52,6 +53,9 @@ const Routing = () => {
       </Route>
       <Route path="/profile/:userid">
         <UserProfile />
+      </Route>
+      <Route path="/following-posts">
+        <FollowedUsersPosts />
       </Route>
     </Switch>
   )
