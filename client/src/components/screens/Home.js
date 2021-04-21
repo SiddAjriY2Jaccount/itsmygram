@@ -179,12 +179,9 @@ function Home() {
                                 <img src={item.photo} />
                             </div>
                             <div className="card-content">
-                                <h4>{item.title}</h4>
-                                <p>{item.body}</p>
-                                <p>{item.likes.length} likes</p>
-                                                                
-                                {/* <i className="material-icons" style={{color: 'blue'}}>favorite</i> */}
-                                
+                                <h5>{item.title}</h5>
+                                <p style={{paddingBottom: "15px"}}>{item.body}</p>
+                                <p style={{paddingBottom: "13px"}}>
                                 {
                                 
                                 item.likes.includes(state._id) 
@@ -192,7 +189,7 @@ function Home() {
                                 ?
 
                                 <i className="material-icons" 
-                                style={{color: 'red', cursor: 'pointer'}}
+                                style={{color: 'red', cursor: 'pointer', paddingRight: '10px'}}
                                 onClick={() => {unlikeposts(item._id);}}
                                 >thumb_down
                                 </i>
@@ -200,12 +197,17 @@ function Home() {
                                 :
                                 
                                 <i className="material-icons" 
-                                style={{color: 'green', cursor: 'pointer'}}
+                                style={{color: 'green', cursor: 'pointer', paddingRight: '10px'}}
                                 onClick={() => {likeposts(item._id);}}
                                 >thumb_up
                                 </i>
                                 
                                 }
+                                {item.likes.length} likes</p>
+                                                                
+                                {/* <i className="material-icons" style={{color: 'blue'}}>favorite</i> */}
+                                
+                                
                                 
                                 {
                                     item.comments.map(record => {

@@ -6,6 +6,8 @@ function FollowedUsersPosts() {
 
     const [data, setData] = useState([])
     const { state, dispatch } = useContext(UserContext)
+    const user = JSON.parse(localStorage.getItem("user"))
+
     useEffect(() => {
         fetch(
             
@@ -151,7 +153,7 @@ function FollowedUsersPosts() {
         
         <div className="home input-field">
             {
-                data.posts.length
+                state.following.length
                 
                 ?
 
@@ -186,12 +188,9 @@ function FollowedUsersPosts() {
                                 <img src={item.photo} />
                             </div>
                             <div className="card-content">
-                                <h4>{item.title}</h4>
-                                <p>{item.body}</p>
-                                <p>{item.likes.length} likes</p>
-                                                                
-                                {/* <i className="material-icons" style={{color: 'blue'}}>favorite</i> */}
-                                
+                                <h5>{item.title}</h5>
+                                <p style={{paddingBottom: "15px"}}>{item.body}</p>
+                                <p style={{paddingBottom: "13px"}}>
                                 {
                                 
                                 item.likes.includes(state._id) 
@@ -199,7 +198,7 @@ function FollowedUsersPosts() {
                                 ?
 
                                 <i className="material-icons" 
-                                style={{color: 'red', cursor: 'pointer'}}
+                                style={{color: 'red', cursor: 'pointer', paddingRight: '10px'}}
                                 onClick={() => {unlikeposts(item._id);}}
                                 >thumb_down
                                 </i>
@@ -207,12 +206,18 @@ function FollowedUsersPosts() {
                                 :
                                 
                                 <i className="material-icons" 
-                                style={{color: 'green', cursor: 'pointer'}}
+                                style={{color: 'green', cursor: 'pointer', paddingRight: '10px'}}
                                 onClick={() => {likeposts(item._id);}}
                                 >thumb_up
                                 </i>
                                 
                                 }
+                                
+                                {item.likes.length} likes</p>
+                                                                
+                                {/* <i className="material-icons" style={{color: 'blue'}}>favorite</i> */}
+                                
+                                
                                 
                                 {
                                     item.comments.map(record => {
@@ -241,7 +246,7 @@ function FollowedUsersPosts() {
 
                 :
 
-                <h2> You are not following any users :/ </h2>
+                <h3> You are not following any users :/ </h3>
             
             }
                 

@@ -116,7 +116,7 @@ function Profile() {
             }}>
                 <div>
                     <img style={{width: '160px', height: '160px', borderRadius: '80px'}} 
-                     className="item" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                     className="item" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                     />
                 </div>
                 <div>
@@ -127,9 +127,9 @@ function Profile() {
                         justifyContent: 'space-between',
                         width: '100%'
                     }}>
-                        <p>  {userProfile.posts.length} posts  | </p>
-                        <p> | {userProfile.user.followers.length} followers  | </p>
-                        <p> | {userProfile.user.following.length} following   </p>
+                        <p style={{paddingRight: "20px"}}>{userProfile.posts.length} posts </p>
+                        <p style={{paddingRight: "20px"}}> {userProfile.user.followers.length} followers </p>
+                        <p style={{paddingRight: "20px"}}> {userProfile.user.following.length} following </p>
                     </div>
 
                     {/* if logged-in user already follows, show only the unfollow button, else show only the follow button */}
