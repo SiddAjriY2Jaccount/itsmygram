@@ -149,7 +149,8 @@ function Home() {
     return (
         <div>
             <div className="home input-field">
-            {
+            {   data
+                ?
                 data.map(item => {
                     return  (
                         <div className="card home-card" key={item.id}>
@@ -233,6 +234,9 @@ function Home() {
 
                     )
                 })
+
+                :
+                <h1>Please log out and log back in, thanks.</h1>
             }
                 
             </div>
