@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const requireLogin = require('../middleware/requireLogin')
 const User = mongoose.model("User")
 
-const { JWT_SECRET } = require('../keys')
+const { JWT_SECRET } = require('../config/keys')
 
 const router = express.Router()
 
