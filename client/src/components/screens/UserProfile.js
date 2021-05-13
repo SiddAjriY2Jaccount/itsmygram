@@ -116,7 +116,7 @@ function Profile() {
             }}>
                 <div>
                     <img style={{width: '160px', height: '160px', borderRadius: '80px'}} 
-                     className="item" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                     className="item responsive-img circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                     />
                 </div>
                 <div>
@@ -165,7 +165,7 @@ function Profile() {
                     {
                         userProfile.posts.map((post) => {
                             return (
-                                <img style={{margin: "10px"}} className="item" src={post.photo} alt={post.title} key={post._id}/>
+                                <img style={{margin: "10px"}} className="item responsive-img" src={post.photo} alt={post.title} key={post._id}/>
                             )
                         })
                     }

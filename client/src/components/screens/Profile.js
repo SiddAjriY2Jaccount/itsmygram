@@ -26,6 +26,7 @@ function Profile() {
             })
     }, [post]);
 
+
     return (
         <div style={{
             maxWidth: "850px",
@@ -39,7 +40,7 @@ function Profile() {
             }}>
                 <div>
                     <img style={{width: '160px', height: '160px', borderRadius: '80px'}} 
-                     className="item" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                     className="item responsive-img circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
                     />
                 </div>
                 <div>
@@ -62,7 +63,7 @@ function Profile() {
                     {
                         post.map((post) => {
                             return (
-                                <img style={{margin: "10px"}} className="item" src={post.photo} alt={post.title} key={post._id}/>
+                                <img style={{margin: "10px"}} className="item responsive-img" src={post.photo} alt={post.title} key={post._id} />
                             )
                         })
                     }
@@ -71,7 +72,7 @@ function Profile() {
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
                     <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                    <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" /> */}
+                    <img className="item" src="https://images.unsplash.com/photo-1503249023995-51b0f3778ccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" /> */}               
             </div>
         </div>
     )
